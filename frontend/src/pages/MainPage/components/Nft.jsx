@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import useScroll from "./useScroll";
-import nft1 from "../img/nft1.png";
-import nft3 from "../img/nft2.png";
-import nft2 from "../img/nft3.png";
+import nft1 from "../img/nft1.webp";
+import nft3 from "../img/nft2.webp";
+import nft2 from "../img/nft3.webp";
 
 const nav_height = "52px"; // 네브바 높이 조정 - 이은혁
 
@@ -35,21 +35,24 @@ const Nft = () => {
               <div className="outer_nftbox">
                 <div className="nftbox" id="nftbox_1" />
                 <p className="nft_name">썬굴쓰토끼</p>
-                <p className="nft_desc">흑화한게 아니라 라식수술을 받았을 뿐이다...</p>
+                <p className="nft_desc">
+                  흑화한게 아니라 라식수술을 받았을 뿐이다...
+                </p>
               </div>
               <div className="outer_nftbox">
                 <div className="nftbox" id="nftbox_2" />
                 <p className="nft_name">두루두루미</p>
                 <p className="nft_desc">
-                  어떤 상황에서도 볍씨를 놓지않는 의지의 새끼두루미. 과체중으로 현재 날 수 없는
-                  상태다.
+                  어떤 상황에서도 볍씨를 놓지않는 의지의 새끼두루미. 과체중으로
+                  현재 날 수 없는 상태다.
                 </p>
               </div>
               <div className="outer_nftbox">
                 <div className="nftbox" id="nftbox_3" />
                 <p className="nft_name">다라미</p>
                 <p className="nft_desc">
-                  두루미와 BFF. 도토리에게 사랑받아 의도치않게 맨날 머리를 맞는다.
+                  두루미와 BFF. 도토리에게 사랑받아 의도치않게 맨날 머리를
+                  맞는다.
                 </p>
               </div>
             </div>
@@ -80,7 +83,6 @@ const Sticky = styled.div`
   top: ${nav_height}px;
   width: 100%;
   height: calc(100%) px;
-  font-family: "GimhaeGayaR";
 `;
 
 const Title = styled.h1`
@@ -89,7 +91,6 @@ const Title = styled.h1`
   text-align: left;
   margin-left: 10px;
   margin-bottom: 40px;
-  font-family: "GimhaeGayaR";
   color: #414141;
 }
 `;

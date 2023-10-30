@@ -1,10 +1,9 @@
 import styled from "styled-components";
 import useScroll from "./useScroll";
 import { useEffect } from "react";
-import { useState } from "react";
-import rabbit from "../img/토끼.png";
-import squirrel from "../img/다람쥐.png";
-import crane from "../img/흑두루미.png";
+import rabbit from "../img/토끼.webp";
+import squirrel from "../img/다람쥐.webp";
+import crane from "../img/흑두루미.webp";
 import { useNavigate } from "react-router";
 import { IoIosArrowDown } from "react-icons/io";
 
@@ -13,12 +12,12 @@ const nav_height = "52px"; // 네브바 높이 조정 - 이은혁
 const Intro = () => {
   const navigate = useNavigate();
   // --- 스크롤 이벤트 관련 - 이은혁
-  const { ref: target, inView, isShown } = useScroll();
-  const scrollToPjt = () => {};
-  const [scrollY, setScrollY] = useState(); // scrollY: 스크롤량 저장
+  const { ref: target, inView } = useScroll();
+  // const scrollToPjt = () => {};
+  // const [scrollY, setScrollY] = useState(); // scrollY: 스크롤량 저장
   const onScroll = () => {
     const value = window.scrollY;
-    setScrollY(parseInt(value));
+    // setScrollY(parseInt(value));
     document.body.style.setProperty("--scroll", value / 1000);
   };
   useEffect(() => {
@@ -37,17 +36,25 @@ const Intro = () => {
               <Circle />
               <Circle />
               <Circle className="wrap_animal">
-                <Img className="rabbit">
-                  <img src={rabbit} alt="" />
-                </Img>
+                <Img
+                  src={rabbit}
+                  width="125"
+                  height="140"
+                  className="rabbit"
+                  alt=""
+                />
               </Circle>
             </WrapCircle>
             <WrapCircle>
               <Circle />
               <Circle className="wrap_animal">
-                <Img className="crane">
-                  <img src={crane} alt="" />
-                </Img>
+                <Img
+                  src={crane}
+                  width="125"
+                  height="140"
+                  className="crane"
+                  alt=""
+                />
               </Circle>
               <Circle />
             </WrapCircle>
@@ -55,14 +62,18 @@ const Intro = () => {
               <Circle />
               <Circle />
               <Circle className="wrap_animal">
-                <Img className="squirrel">
-                  <img src={squirrel} alt="" />
-                </Img>
+                <Img
+                  src={squirrel}
+                  width="125"
+                  height="140"
+                  className="squirrel"
+                  alt=""
+                />
               </Circle>
             </WrapCircle>
           </InlineBox>
           <TextBox>
-            <Text style={{ fontFamily: "GimhaeGayaR" }}>
+            <Text>
               <H2 className="animation_h2">기부가, 마음이, 모두가</H2>
               <H1 className="animation_h1">모이다</H1>
               <H3 className="animation_h3">
@@ -74,16 +85,12 @@ const Intro = () => {
                 <br />
               </H3>
             </Text>
-            <Button style={{ fontFamily: "GimhaeGayaR" }} onClick={() => navigate("/donation")}>
-              함께하기
-            </Button>
+            <Button onClick={() => navigate("/donation")}>함께하기</Button>
           </TextBox>
         </div>
-        <div>
-          {/* {inView && scrollY - target.current?.offsetTop}
-            {inView ? "true" : "false"} */}
-        </div>
-        <Arrow onClick={() => window.scrollTo({ top: 2500, behavior: "smooth" })}>
+        <Arrow
+          onClick={() => window.scrollTo({ top: 2500, behavior: "smooth" })}
+        >
           <IoIosArrowDown size="1.5rem" color="#959595" />
         </Arrow>
       </Sticky>
@@ -115,10 +122,17 @@ const Circle = styled.div`
   background-color: #e1edd5;
   margin: 10px;
 `;
-const Img = styled.div``;
+
+const Img = styled.img`
+  object-fit: cover;
+  width: 125px;
+  height: 140px;
+`;
+
 const InlineBox = styled.div`
   display: inline-block;
 `;
+
 const TextBox = styled.div`
   display: flex;
   flex-direction: column;
