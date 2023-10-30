@@ -1,23 +1,24 @@
 import Projects from "./components/Projects";
-import Intro from "./components/Intro"
+import Intro from "./components/Intro";
 import Nft from "./components/Nft";
-import Footer from "../../components/Footer/Index"
+// import Footer from "../../components/Footer/Index";
 import styled from "styled-components";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import useCards from "./components/useCards";
 
 const MainPage = () => {
-  const {cards, isLoading, error} = useCards([]);
-  const cardList = cards.map((card, index) => <Projects card={card} index={index} key={index}></Projects>);
-  useEffect(() => {
-    // 수연: project 받아오기
-
-  }, []);
+  const { cards, isLoading } = useCards([]);
 
   return (
     <Wrapper>
       <Intro />
-      <div>{cardList}</div>
+      <div>
+        {isLoading && <div>불러오고 있어요!</div>}
+        {!isLoading &&
+          cards?.map((card, index) => (
+            <Projects card={card} index={index} key={index}></Projects>
+          ))}
+      </div>
       <Nft />
     </Wrapper>
   );
@@ -30,7 +31,7 @@ const Wrapper = styled.div`
   justify-content: center;
   top: 0;
   left: 0;
-  background-color: #FAFAF3;
+  background-color: #fafaf3;
 `;
 
 export default MainPage;
