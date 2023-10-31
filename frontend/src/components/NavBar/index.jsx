@@ -8,7 +8,7 @@ import api from "../../api/auth";
 import logo_white from "../../assets/img/Logo_white.svg";
 import logo from "../../assets/img/Logo.svg";
 import MetamaskUncheck from "../MetamaskUncheck";
-import { BsTicketPerforatedFill } from 'react-icons/bs';
+import { HiOutlineTicket } from "@react-icons/all-files/hi/HiOutlineTicket";
 
 // 수연: navbar
 const NavBar = () => {
@@ -57,7 +57,17 @@ const NavBar = () => {
   });
 
   // 수연: 로그인 상태에 따라 navbar 변경
-  const { isLogin, setIsLogin, role, setRole, point, setPoint, ticketCnt, setTicketCnt, change } = useContext(AuthContext);
+  const {
+    isLogin,
+    setIsLogin,
+    role,
+    setRole,
+    point,
+    setPoint,
+    ticketCnt,
+    setTicketCnt,
+    change,
+  } = useContext(AuthContext);
 
   useEffect(() => {
     if (isLogin) {
@@ -106,27 +116,53 @@ const NavBar = () => {
   return (
     <Nav className={scrollValue > 0 ? "scrolled" : "unscrolled"}>
       <InnerNav>
-      <MenuLeft>
-        <div style={{ width: "70px", display: "flex", alignItems: "center", justifyContent: "center"}}>
-          <Logo onClick={() => {goPage("/"); window.scrollTo({ top: 0, behavior: 'smooth' });}} className={scrollValue > 0 ? "scrolled" : "unscrolled"}/>
-        </div>
+        <MenuLeft>
+          <div
+            style={{
+              width: "70px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Logo
+              onClick={() => {
+                goPage("/");
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
+              className={scrollValue > 0 ? "scrolled" : "unscrolled"}
+            />
+          </div>
           {navigation.map((item, index) => (
             <Link on={item.name} key={index} to={item.href}>
               <Menu>{item.name}</Menu>
             </Link>
           ))}
-          </MenuLeft>
-              <MenuRight>
+        </MenuLeft>
+        <MenuRight>
           {isLogin && role === "ROLE_ADMIN" ? (
             <Menu onClick={() => goPage("/admin")}>Admin 계정입니다.</Menu>
-            ) : (
-              ""
-              )}
+          ) : (
+            ""
+          )}
           {isLogin ? (
             <>
-              <Link to="/gatcha"><Menu><BsTicketPerforatedFill className='icon' color="inherit" size="1.2rem"/>{ticketCnt}</Menu></Link>
-              <Link to="/point"><Menu>{point} P</Menu></Link>
-              <Link to="/profile"><Menu>MYPAGE</Menu></Link>
+              <Link to="/gatcha">
+                <Menu>
+                  <HiOutlineTicket
+                    className="icon"
+                    color="inherit"
+                    size="1.2rem"
+                  />
+                  {ticketCnt}
+                </Menu>
+              </Link>
+              <Link to="/point">
+                <Menu>{point} P</Menu>
+              </Link>
+              <Link to="/profile">
+                <Menu>MYPAGE</Menu>
+              </Link>
               <Menu onClick={LogoutSubmit}>LOGOUT</Menu>
             </>
           ) : (
@@ -136,7 +172,7 @@ const NavBar = () => {
               <Menu onClick={() => goPage("/login")}>LOGIN</Menu>
             </>
           )}
-          </MenuRight>
+        </MenuRight>
       </InnerNav>
     </Nav>
   );
@@ -175,8 +211,7 @@ const InnerNav = styled.div`
   width: 100%;
   max-width: 1000px;
 `;
-const MenuRight = styled.div`
-`
+const MenuRight = styled.div``;
 const MenuLeft = styled.div`
   font-size: 1rem;
   line-height: 1.5rem;

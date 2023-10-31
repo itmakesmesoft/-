@@ -22,14 +22,6 @@
   font-style: normal;
 }
 
-@font-face {
-  font-family: "GimhaeGayaR";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/GimhaeGayaR.woff")
-    format("woff");
-  font-weight: normal;
-  font-style: normal;
-}
-
 .nft {
   height: 2000px;
   width: 100vw;
@@ -120,18 +112,14 @@ body {
   overflow: hidden;
 }
 .rabbit {
-  height: 160px;
   position: relative;
   top: -5px;
   left: -10px;
-  width: 150px;
   animation-name: before_jump_out, jump_out;
   animation-duration: 2s;
   animation-delay: calc(var(--scroll) * -1s + 0.3s);
 }
 .squirrel {
-  height: 140px;
-  width: 140px;
   position: relative;
   top: 5px;
   left: -10px;
@@ -140,7 +128,6 @@ body {
   animation-delay: calc(var(--scroll) * -1s + 0.7s);
 }
 .crane {
-  height: 140px;
   position: relative;
   top: -5px;
   border-radius: 70px;

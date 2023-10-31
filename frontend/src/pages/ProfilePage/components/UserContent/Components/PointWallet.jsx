@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Paging from "../../../../../components/Pagination/Paging";
-import { BsTicketPerforatedFill } from "react-icons/bs";
+import { HiOutlineTicket } from "@react-icons/all-files/hi/HiOutlineTicket";
 import badge_charge from "../../../../../assets/img/badge_charge.png";
 import badge_donation from "../../../../../assets/img/badge_donaition.png";
 import styled from "styled-components";
@@ -15,11 +15,11 @@ const PointWallet = () => {
   const [length, setLength] = useState(0);
   const sort = ["ALL", "DONATION", "CHARGE"];
   const sortName = ["모두", "기부", "충전"];
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(true);
 
   const getPointData = async () => {
     try {
-      setIsLoading(true)
+      setIsLoading(true);
       // console.log(category, sort);
       const res = await api({
         url: "/users/me/points",
@@ -34,12 +34,12 @@ const PointWallet = () => {
         },
       });
       if (res) {
-        setIsLoading(false)
+        setIsLoading(false);
         setDatas(res.data.pointList);
         setLength(res.data.length);
       }
     } catch (err) {
-      setIsLoading(false)
+      setIsLoading(false);
       console.log(err);
     }
   };
@@ -87,10 +87,18 @@ const PointWallet = () => {
                   )}
                 </div>
                 <div className="item_sec main_sec">
-                    {data.category==='DONATION'? (<p className="weak"><span>[{data.generation}차] {data.projectSubject}</span></p>):""}
-                    <p className="title mb-1">
-                        {data.category==='DONATION'? "기부":"충전"}
+                  {data.category === "DONATION" ? (
+                    <p className="weak">
+                      <span>
+                        [{data.generation}차] {data.projectSubject}
+                      </span>
                     </p>
+                  ) : (
+                    ""
+                  )}
+                  <p className="title mb-1">
+                    {data.category === "DONATION" ? "기부" : "충전"}
+                  </p>
                   <p className="weak">{year + "." + month + "." + day}</p>
                 </div>
                 <div className="item_sec w-2">
@@ -103,7 +111,7 @@ const PointWallet = () => {
                 <div className="item_sec w-2">
                   <p className="weak">받은 티켓</p>
                   <p className="strong">
-                    <BsTicketPerforatedFill
+                    <HiOutlineTicket
                       className="icon"
                       color="#c2c2c3"
                       size="1.5rem"
@@ -118,7 +126,7 @@ const PointWallet = () => {
       </div>
       {/* <table>
             <tbody>
-                {datas?.map((data, index) => { 
+                {datas?.map((data, index) => {
                 return (
                 <tr key={index}>
                 <td>분류(기부/적립){data.category}</td>
@@ -132,13 +140,17 @@ const PointWallet = () => {
                 })}
             </tbody>
         </table> */}
-      {/* <div className='group_pagebtn'> 
-            {pageList?.map((num, index)=>{ 
+      {/* <div className='group_pagebtn'>
+            {pageList?.map((num, index)=>{
                 return (
-                    <button className={pageNum===num? "pagebtn current":"pagebtn"} key={index} onClick={()=> setPageNum(num)}>{num}</button>) 
+                    <button className={pageNum===num? "pagebtn current":"pagebtn"} key={index} onClick={()=> setPageNum(num)}>{num}</button>)
             })}
         </div> */}
-      <p className="loading">{datas.length === 0 && !isLoading? "내역이 존재하지 않습니다.":"로딩 중"}</p>
+      <p className="loading">
+        {datas.length === 0 && !isLoading
+          ? "내역이 존재하지 않습니다."
+          : "로딩 중"}
+      </p>
       <Paging
         page={pageNum}
         totalItem={length}
@@ -167,7 +179,7 @@ const SortContainer = styled.div`
   position: relative;
 
   ${tw`
-    
+
   `}
 `;
 

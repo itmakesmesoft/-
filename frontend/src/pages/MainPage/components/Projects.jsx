@@ -3,14 +3,14 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import useScroll from "./useScroll";
 import "../main.css";
-import 다람쥐_프로젝트 from "../img/다람쥐 프로젝트.jpeg";
-import 야생동물_프로젝트 from "../img/야생동물 프로젝트.jpg";
-import 두루미_프로젝트 from "../img/두루미 프로젝트.jpg";
+import 다람쥐_프로젝트 from "../img/다람쥐_프로젝트.webp";
+import 야생동물_프로젝트 from "../img/야생동물_프로젝트.webp";
+import 두루미_프로젝트 from "../img/두루미_프로젝트.webp";
 
 const nav_height = "52px"; // 네브바 높이 조정 - 이은혁
 
 const Projects = (props) => {
-  const { id, projectReqDto, donationResDto } = props.card; // props 데이터 - 이은혁
+  const { projectReqDto, donationResDto } = props.card; // props 데이터 - 이은혁
   const index = props.index; // props 데이터 - 이은혁
 
   // --------- 라우트 관련 - 이은혁
@@ -19,7 +19,7 @@ const Projects = (props) => {
     navigate("/donation/" + routePath, { replace: false });
   };
   // -----------------------------
-
+  console.log(props.card);
   let mainImg;
   if (projectReqDto.category === "CRANE") {
     mainImg = 두루미_프로젝트;
@@ -30,11 +30,11 @@ const Projects = (props) => {
   }
   // --- 스크롤 이벤트 관련 - 이은혁
   const { ref: target, inView } = useScroll();
-  const [scrollY, setScrollY] = useState(); // scrollY: 스크롤량 저장
+  // const [scrollY, setScrollY] = useState(); // scrollY: 스크롤량 저장
 
   const onScroll = () => {
     const value = window.scrollY;
-    setScrollY(parseInt(value));
+    // setScrollY(parseInt(value));
     document.body.style.setProperty("--scroll", value / 1000);
   };
 
@@ -47,10 +47,15 @@ const Projects = (props) => {
 
   return (
     <StickyContainer ref={target}>
-      <Sticky id={"card_" + index} className={inView ? "page card show" : "page card"}>
+      <Sticky
+        id={"card_" + index}
+        className={inView ? "page card show" : "page card"}
+      >
         <div className="inner_page">
-          <Image src={mainImg} alt="" />
-          <Subject category={projectReqDto.category}>{projectReqDto.subject}</Subject>
+          <Image width="700px" height="300px" src={mainImg} alt="" />
+          <Subject category={projectReqDto.category}>
+            {projectReqDto.subject}
+          </Subject>
           <Content>
             <p id="desc">{projectReqDto.description}</p>
             {/* <p>모이 1개당 {projectReqDto.pointPerMoi} point</p> */}
@@ -63,9 +68,11 @@ const Projects = (props) => {
               }}
             >
               <div style={{ display: "inline-block" }}>
-                <p id="amount">현재 {donationResDto.amount.toLocaleString("ko-KR")} 원</p>
+                <p id="amount">
+                  현재 {donationResDto.amount?.toLocaleString("ko-KR")} 원
+                </p>
                 <p id="target_amount">
-                  목표 {donationResDto.targetAmount.toLocaleString("ko-KR")} 원
+                  목표 {donationResDto.targetAmount?.toLocaleString("ko-KR")} 원
                 </p>
               </div>
               <div style={{ display: "inline-block" }}>
@@ -77,14 +84,7 @@ const Projects = (props) => {
                 </Button>
               </div>
             </div>
-            {/* <p>{new Date(donationResDto.endDate).getFullYear()}년 ~ {donationResDto.startDate}</p> */}
-            {/* <p>{donationResDto.subject}</p> */}
           </Content>
-          <div>
-            {/* {()=> {return (<Button onClick={() => clickCard(id)} style={}>참여하기</Button>)} } */}
-            {/* {inView && scrollY - target.current?.offsetTop}
-            {inView ? "true" : "false"} */}
-          </div>
         </div>
       </Sticky>
     </StickyContainer>
@@ -104,22 +104,27 @@ const Sticky = styled.div`
 
 const Image = styled.img`
   border-radius: 30px;
-  width: 100%;
-  height: 300px;
   object-fit: cover;
   background: #c2c2c2;
   margin-bottom: 25px;
+  width: 700px;
+  height: 300px;
 `;
 
 const Subject = styled.h2`
   font-size: 2.5rem;
   font-weight: 900;
-  color: ${(props) => (props.category === "WILD_ANIMAL" ? "rgba(210, 193, 0, 1)" : "")};
-  color: ${(props) => (props.category === "CRANE" ? "rgba(23, 84, 102, 1)" : "")};
-  color: ${(props) => (props.category === "SQUIRREL" ? "rgba(189, 120, 0, 1)" : "")};
-  font-family: ${(props) => (props.category === "CRANE" ? "KyoboHandwriting2020A" : "")};
+  color: ${(props) =>
+    props.category === "WILD_ANIMAL" ? "rgba(210, 193, 0, 1)" : ""};
+  color: ${(props) =>
+    props.category === "CRANE" ? "rgba(23, 84, 102, 1)" : ""};
+  color: ${(props) =>
+    props.category === "SQUIRREL" ? "rgba(189, 120, 0, 1)" : ""};
+  font-family: ${(props) =>
+    props.category === "CRANE" ? "KyoboHandwriting2020A" : ""};
   font-family: ${(props) => (props.category === "SQUIRREL" ? "SBAggroB" : "")};
-  font-family: ${(props) => (props.category === "WILD_ANIMAL" ? "Cafe24Ssurround" : "")};
+  font-family: ${(props) =>
+    props.category === "WILD_ANIMAL" ? "Cafe24Ssurround" : ""};
 `;
 
 const Content = styled.div`
@@ -145,9 +150,12 @@ const Content = styled.div`
 
 const Button = styled.button`
   padding: 10px 40px;
-  background-color: ${(props) => (props.category === "WILD_ANIMAL" ? "rgba(210, 193, 0, 1)" : "")};
-  background-color: ${(props) => (props.category === "CRANE" ? "rgba(23, 84, 102, 1)" : "")};
-  background-color: ${(props) => (props.category === "SQUIRREL" ? "rgba(189, 120, 0, 1)" : "")};
+  background-color: ${(props) =>
+    props.category === "WILD_ANIMAL" ? "rgba(210, 193, 0, 1)" : ""};
+  background-color: ${(props) =>
+    props.category === "CRANE" ? "rgba(23, 84, 102, 1)" : ""};
+  background-color: ${(props) =>
+    props.category === "SQUIRREL" ? "rgba(189, 120, 0, 1)" : ""};
   color: white;
   font-weight: 700;
   border-radius: 5px;
