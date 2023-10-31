@@ -5,7 +5,9 @@ import { useNavigate } from "react-router-dom";
 import api from "../../../../api/auth";
 import useValidator from "../../../../components/Validator";
 import Modal from "../../../../components/Modal/index";
-import { GiAcorn, GiCorn, GiWheat } from "react-icons/gi";
+import { GiAcorn } from "@react-icons/all-files/gi/GiAcorn";
+import { GiCorn } from "@react-icons/all-files/gi/GiCorn";
+import { GiWheat } from "@react-icons/all-files/gi/GiWheat";
 
 const UserStatus = () => {
   const navigate = useNavigate();

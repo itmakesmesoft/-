@@ -5,7 +5,7 @@ import rabbit from "../img/토끼.webp";
 import squirrel from "../img/다람쥐.webp";
 import crane from "../img/흑두루미.webp";
 import { useNavigate } from "react-router";
-import { IoIosArrowDown } from "react-icons/io";
+import { IoIosArrowDown } from "@react-icons/all-files/io/IoIosArrowDown";
 
 const nav_height = "52px"; // 네브바 높이 조정 - 이은혁
 
